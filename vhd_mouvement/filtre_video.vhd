@@ -76,7 +76,7 @@ component module_SRAM
 end component;
 
 
-component module_diff
+component module_roberts
   port (
 	in_active_area 		: 	in 	std_logic ;
 	iY1					:	in	std_logic_vector(7 downto 0) ;
@@ -84,7 +84,7 @@ component module_diff
 	oY					: 	out	std_logic_vector(7 downto 0) ;
 	threshold			: 	in 	std_logic_vector(7 downto 0) 
   ) ;
-end component ; -- module_diff
+end component ; -- module_roberts
 
 
 --signaux flux video
@@ -135,13 +135,13 @@ begin
 			low_mask => low_mask
 			);
 	
-	u_3 : module_diff
+	u_3 : module_roberts
 	port map(
 			in_active_area => in_active_area,
 			iY1 => sig_Y1,
 			iY2 => sig_Y2,
 			oY=> sig_Y3,
-			threshold=> threshold
+			--threshold=> threshold --pas besoin pour le filtrage
 	);
 	
 	--concurent
@@ -161,4 +161,4 @@ begin
 	end process ; -- process_affichage
 	
 
-end architecture A;	
+end architecture A;
