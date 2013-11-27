@@ -119,4 +119,4 @@ end architecture ; -- arch
 --
 -- 1er cycle : lecture + traitement
 -- 2e cycle : ecriture + registres
---
+--...
