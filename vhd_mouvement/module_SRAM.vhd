@@ -51,7 +51,8 @@ architecture A of module_SRAM is
 		end if;	
 	end if;			
 	end process process_seq;
-		
+	
+	--process combinatoire	
 	process_com : process( in_active_area, X_cpt, Y_cpt, address_curr, synchro_curr, data_out_curr, data_in, data_SRAM )
 	begin
 	if in_active_area = '1'	then		-- zone active
@@ -70,7 +71,7 @@ architecture A of module_SRAM is
 			address_next <= address_curr;				-- address conservée pour le cycle d'écriture
 		else  								-- cycle écriture
 			read_enable <= '0';					-- SRAM en mode écriture
-			write_enable <= '0';				-- SRAM en mode écriture
+			write_enable <= '0';				-- SRAM en mode écriture (signaux d'ecriture actifs a zero)
 			data_out_next <= data_out_curr;		-- memorisation de data_out pendant le cycle d'écriture
 			data_SRAM <= X"00" & data_in;		-- ecriture poids faible
 			if Y_cpt = "00000000000" then

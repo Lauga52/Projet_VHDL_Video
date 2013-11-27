@@ -78,19 +78,18 @@ end component;
 
 component module_roberts
   port (
-	in_active_area 		: 	in 	std_logic ;
-	iY1					:	in	std_logic_vector(7 downto 0) ;
-	iY2					:	in	std_logic_vector(7 downto 0) ;
-	oY					: 	out	std_logic_vector(7 downto 0) ;
-	threshold			: 	in 	std_logic_vector(7 downto 0) 
-  ) ;
-end component ; -- module_roberts
+	CLK			: in std_logic;
+	RESET		: in std_logic;	
+  	in_active_area	: in std_logic;
+	iY				: in std_logic_vector(7 downto 0) ; --pixel courant
+	oY				: out std_logic_vector(7 downto 0) --output pixel
+  );
+end component; -- module_roberts
 
 
 --signaux flux video
 signal sig_Y1			: std_logic_vector(7 downto 0) ;
 signal sig_Y2			: std_logic_vector(7 downto 0) ;
-signal sig_Y3			: std_logic_vector(7 downto 0) ;
 
 --signaux de synchro module fentrage
 signal Y_cpt			: std_logic_vector(10 downto 0);
@@ -98,7 +97,6 @@ signal X_cpt 			: std_logic_vector(10 downto 0);
 signal in_active_area 	: std_logic;
 
 --signaux debug
-signal threshold		: std_logic_vector(7 downto 0) ;
 
 begin
 	u_1: module_fenetrage 
@@ -124,7 +122,7 @@ begin
 			X_cpt => X_cpt,
 			Y_cpt => Y_cpt,
 			data_in => sig_Y1,
-			data_out => sig_Y2,
+			data_out => sig_X,
 			-- SRAM
 			address_SRAM => address_SRAM,
 			data_SRAM => data_SRAM,	
@@ -138,9 +136,10 @@ begin
 	u_3 : module_roberts
 	port map(
 			in_active_area => in_active_area,
-			iY1 => sig_Y1,
-			iY2 => sig_Y2,
-			oY=> sig_Y3,
+			iY => sig_Y1,
+			oY=> sig_Y2,
+			RESET => RESET;
+			CLK => CLK;
 			--threshold=> threshold --pas besoin pour le filtrage
 	);
 	
@@ -150,15 +149,14 @@ begin
 	oCr <= X"80";
 
 	--process
-	process_affichage : process( switch, iY, sig_Y1, sig_Y2, sig_Y3)
+	process_affichage : process( switch, iY, sig_Y1, sig_Y2)
 	begin
 		case( switch(4 downto 0) ) is
 			when "00000" => oY <= iY; -- avant fenetrage		
 			when "00001" => oY <= sig_Y1; -- après fenetrage				
-			when "00011" => oY <= sig_Y2; -- après memoire
-			when others  => oY <= sig_Y3;  -- après diff
+			when others  => oY <= sig_Y2;  -- après roberts
 		end case ;
 	end process ; -- process_affichage
 	
 
-end architecture A;
+end architecture A;	

@@ -1,11 +1,2 @@
 # Reading C:/altera/modelsim_ase/tcl/vsim/pref.tcl 
-# OpenFile {D:/Users/Gaetan/Dropbox/SICOM/Projet VHDL Video/ProjetIWorkOn/vhd_mouvement/filtre_video.vhd} 
-# Loading project ProjetVideo
-# Compile of filtre_video.vhd was successful.
-# Compile of memoire_ligne.vhd was successful.
-# Compile of module_diff.vhd was successful.
-# Compile of module_fenetrage.vhd was successful.
-# Compile of module_SRAM.vhd was successful.
-# Compile of bench.vhd was successful.
-# Compile of sram.vhd was successful.
-# 7 compiles, 0 failed with no errors. 
+# OpenFile E:/GitHub/Projet_VHDL_Video/vhd_mouvement/filtre_video.vhd 

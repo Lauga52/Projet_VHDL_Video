@@ -4,38 +4,114 @@ use IEEE.numeric_std.all;
 
 entity module_roberts is
   port (
-	in_active_area	: in std_logic;
-	iY				: in std_logic_vector(7 downto 0) ; --image pixel
-	oY				: out std_logic_vector(7 downto 0); --output pixel
-  ) ;
-end entity ; -- module_roberts
+  	CLK			: in std_logic;
+	RESET		: in std_logic;	
+  	in_active_area	: in std_logic;
+	iY				: in std_logic_vector(7 downto 0) ; --pixel courant
+	oY				: out std_logic_vector(7 downto 0) --output pixel
+  );
+end entity; -- module_roberts
 
---TODO : c/c l'entity module_memoire_ligne
+
+
+
 
 
 architecture arch of module_roberts is
 
 begin
 
-	--TODO : instantiation de la memoire ligne
+component module_memoire_ligne
+		generic (
+		address_size : integer
+		);
+port (
+		CLK			: in std_logic;
+		RESET		: in std_logic;		
+		address 	: in std_logic_vector(7 downto 0);
+		data_in		: in std_logic_vector(word_size-1 downto 0);
+		data_out	: out std_logic_vector(word_size-1 downto 0);
+		read_write	: in std_logic
+		);
+end component;
+
+
+
+
+--sjgnaux
+signal pixel_lig_prec			: std_logic_vector(7 downto 0) ;
+signal pixel_prec			: std_logic_vector(7 downto 0) ;
+signal address_cur			: std_logic_vector(7 downto 0) ;
+signal sig_data_out			: std_logic_vector(7 downto 0) ;
+signal read_write			: std_logic;
+
+
 	u1: module_memoire_ligne
+	
+	generic map(
+		address_size => address_size
+	);
+		
+	port map(
+		CLK => CLK,
+		RESET => RESET,			
+		address	=> address_cur,
+		data_in	=> iY,
+		data_out => sig_data_out,
+		read_write => read_write,
+	);
+	
 	
 
 
-
-	process_roberts : process( in_active_area, iY1, iY2, threshold )
+	process_roberts : process( in_active_area, iY, CLK, RESET) --signal iY was modified : incoming pixel
+	
+	variable var_data_out : std_logic_vector(7 downto 0) ;
+	variable var_data_in : std_logic_vector(7 downto 0) ;
+	variable var_pixel_lig_prec : std_logic_vector(7 downto 0) ;
+	variable var_pixel_prec : std_logic_vector(7 downto 0) ;
+	variable var_oY : std_logic_vector(7 downto 0) ;
+	
+	
 	begin
-		if in_active_area = '1' then
-			if (unsigned(iY1) > (unsigned(iY2)+unsigned(threshold))) then
-				oY<=X"EB";	-- pixel blanc
-			elsif (unsigned(iY2) > (unsigned(iY1)+unsigned(threshold))) then
-				oY<=X"EB";	-- pixel blanc
-			else	
-				oY<=X"10";	-- pixel noir
-			end if;
-		else
-			oY<=X"10";	-- pixel noir
-		end if;	
+		if CLK'event and CLK='1' then
+			if in_active_area = '1' then
+				
+				if RESET = '1' then 
+					read_write <='0';
+				end if;
+				
+			
+				else if read_write = '0' then -- on va faire une lecture en memoire_ligne
+				
+					-- mise à jour des variables :
+					var_data_out := sig_data_out;
+					var_data_in := iY;
+					var_pixel_lig_prec := pixel_lig_prec;
+					var_pixel_prec := pixel_prec;
+				
+					-- Calcul du filtrage :
+					var_oY := iY+sig_data_out-pixel_lig_prec-pixel_prec
+				
+				
+					-- mise à jour des signaux mais effectif en sortant du process
+					pixel_lig_prec <= var_data_out; --valeur future de pixel_lig_prec = valeur presente de sig_data_out
+					pixel_prec <= var_data_in; --valeur future de pixel_prec = valeur presente de iY
+				
+
+					oY <= var_oY;
+					read_write <='1';
+				
+				end if;
+					
+				else if read_write = '1' then -- on va faire une ecriture en memoire_ligne
+					
+					--iY est ecrit en memoire_ligne via data_in					
+					address_cur <= address_cur+1;	
+					read_write <='0';
+		
+				end if;	
+					
 	end process ; -- process_roberts
 	
 end architecture ; -- arch
