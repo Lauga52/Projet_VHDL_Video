@@ -6,22 +6,23 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity memoire_ligne is
+entity module_memoire_ligne is
 		generic (
-		address_size : integer:=8; --TODO : coder 8 en dur ?
+		address_size : integer:=8 --TODO : coder 8 en dur ?
+		--word_size : integer:=8
 		);
 	    port (
 		CLK			: in std_logic;
 		RESET		: in std_logic;		
 		address 	: in std_logic_vector(7 downto 0);
-		data_in		: in std_logic_vector(word_size-1 downto 0);
-		data_out	: out std_logic_vector(word_size-1 downto 0);
+		data_in		: in std_logic_vector(7 downto 0);
+		data_out	: out std_logic_vector(7 downto 0);
 		read_write	: in std_logic
 		);
-end entity memoire_ligne;
+end entity module_memoire_ligne;
 
 
-architecture A of memoire_ligne is
+architecture A of module_memoire_ligne is
 
 --signal
 type mem_type is array (2**address_size - 1  downto 0) of std_logic_vector(7 downto 0);

@@ -80,7 +80,7 @@ component module_roberts
   port (
 	CLK			: in std_logic;
 	RESET		: in std_logic;	
-  	in_active_area	: in std_logic;
+ 	in_active_area	: in std_logic;
 	iY				: in std_logic_vector(7 downto 0) ; --pixel courant
 	oY				: out std_logic_vector(7 downto 0) --output pixel
   );
@@ -90,6 +90,7 @@ end component; -- module_roberts
 --signaux flux video
 signal sig_Y1			: std_logic_vector(7 downto 0) ;
 signal sig_Y2			: std_logic_vector(7 downto 0) ;
+signal sig_X    : std_logic_vector(7 downto 0) ;
 
 --signaux de synchro module fentrage
 signal Y_cpt			: std_logic_vector(10 downto 0);
@@ -105,9 +106,9 @@ begin
 			)
 	port map(
 			VGA_X => VGA_X,
-			VGA_Y => VGA_Y,			
-			iY	=> iY,
-			oY	=> sig_Y1,
+			VGA_Y => VGA_Y,                        
+			iY        => iY,
+			oY        => sig_Y1,
 			in_active_area => in_active_area,
 			X_cpt => X_cpt,
 			Y_cpt => Y_cpt
@@ -134,17 +135,20 @@ begin
 			);
 	
 	u_3 : module_roberts
+	generic map(
+			address_size => size
+			)
 	port map(
 			in_active_area => in_active_area,
 			iY => sig_Y1,
 			oY=> sig_Y2,
-			RESET => RESET;
-			CLK => CLK;
+			RESET => RESET,
+			CLK => CLK
 			--threshold=> threshold --pas besoin pour le filtrage
 	);
 	
 	--concurent
-	threshold <= switch(17 downto 10);
+--	threshold <= switch(17 downto 10);
 	oCb <= X"80";		
 	oCr <= X"80";
 
