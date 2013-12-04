@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+--use IEEE.std_logic_arith.all;
+--use IEEE.std_logic_signed.all;
 
 --library lib_VIDEO;
 --use lib_VIDEO.all;
@@ -11,7 +13,7 @@ end entity bench;
 
 architecture A of bench is
 	
-	constant size : integer := 4;			
+	constant size : integer := 8;			
 	
 	component filtre_video 
 		generic (
@@ -93,7 +95,8 @@ architecture A of bench is
 		signal chip_enable 		:  std_logic;						-- à connecter à SRAM_CE_N 
 		signal high_mask 		:  std_logic; 						-- à connecter à SRAM_UB_N
 		signal low_mask 		:  std_logic;
-			
+		
+		signal Compt : std_logic_vector(7 downto 0):= (others => '0');
 		
 		
 				
@@ -148,6 +151,9 @@ begin
 	
 	process_simu : process(VGA_X, VGA_Y)
 	variable temp : std_logic_vector(10 downto 0);
+	
+
+	
 	begin
 		if VGA_X < std_logic_vector(to_unsigned(2**size+5,11)) then
 			VGA_X <= std_logic_vector(unsigned(VGA_X)+1) after 40 ns;
@@ -162,11 +168,11 @@ begin
 		end if;				
 
 -- test 1 :		
---		iY <= std_logic_vector(unsigned(iY) + 1); 
+		iY <= std_logic_vector(unsigned(iY) + 1); 
 
 -- test 2 :
-		temp := std_logic_vector(unsigned(VGA_X) + unsigned(VGA_Y(6 downto 0) & '0'));
-		iY <= temp(7 downto 0);
+--		temp := std_logic_vector(unsigned(VGA_X) + unsigned(VGA_Y(6 downto 0) & '0'));
+--		iY <= temp(7 downto 0);
 		
 -- test 3 :				
 --		temp := std_logic_vector(unsigned(VGA_Y));
@@ -183,6 +189,12 @@ begin
 --			end if;	
 --		end if;		
 --
+-- test 5:
+--
+--iY <= std_logic_vector(unsigned(iY) + unsigned(Compt));
+
+--Compt <=std_logic_vector(unsigned( Compt) + 1) after 40 ns; 
+
 					
 	end process ; -- process_simu
 	

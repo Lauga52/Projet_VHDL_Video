@@ -48,7 +48,7 @@ end component;
 --sjgnaux
 signal pixel_lig_prec			: std_logic_vector(7 downto 0) ;
 signal pixel_prec			: std_logic_vector(7 downto 0) ;
-signal address_cur			: std_logic_vector(7 downto 0) ;
+signal address_cur			: std_logic_vector(address_size-1 downto 0) ;
 signal sig_data_out			: std_logic_vector(7 downto 0) ;
 signal read_write			: std_logic;
 
@@ -85,9 +85,9 @@ begin
 		if CLK'event and CLK='1' then
 			if in_active_area = '1' then
 				
-				if RESET = '1' then 
+				if RESET = '0' then 
 					read_write <='0';
-				
+				  address_cur <="00000000";
 			
 				elsif read_write = '0' then -- on va faire une lecture en memoire_ligne
 				
@@ -101,7 +101,7 @@ begin
 					var_oY := iY + sig_data_out - pixel_lig_prec - pixel_prec;
 				
 				
-					-- mise à jour des signaux mais effectif en sortant du process
+					-- mise a jour des signaux mais effectif en sortant du process
 					pixel_lig_prec <= var_data_out; --valeur future de pixel_lig_prec = valeur presente de sig_data_out
 					pixel_prec <= var_data_in; --valeur future de pixel_prec = valeur presente de iY
 				

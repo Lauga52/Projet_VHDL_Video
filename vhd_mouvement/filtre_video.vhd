@@ -77,6 +77,9 @@ end component;
 
 
 component module_roberts
+generic (
+			address_size			: integer := 8
+			);
   port (
 	CLK			: in std_logic;
 	RESET		: in std_logic;	
