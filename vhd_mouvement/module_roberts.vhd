@@ -122,6 +122,19 @@ begin
 
 	process_roberts : process(CLK, RESET) --signal iY was modified : incoming pixel
 	
+	function Max(a,b:integer)
+		return integer is
+			begin
+				if a>b
+					return a;
+				else
+					return b;
+				end if
+			end Max
+	
+	
+	
+	
 	variable var_data_out : std_logic_vector(7 downto 0) ;
 	variable var_data_in : std_logic_vector(7 downto 0) ;
 	variable var_pixel_lig_prec : std_logic_vector(7 downto 0) ;
@@ -130,7 +143,12 @@ begin
 	variable var_Gv : std_logic_vector(7 downto 0) ;
 	variable var_Gh : std_logic_vector(7 downto 0) ;
 	
+	variable d0		: std_logic_vector(15 downto 0) ;
+	variable d1		: std_logic_vector(15 downto 0) ;	
+	variable d2		: std_logic_vector(15 downto 0) ;	
+	variable d3		: std_logic_vector(15 downto 0) ;
 	
+	variable var_G_Max	: std_logic_vector(15 downto 0) ;
 	
 	begin
 		if CLK'event and CLK='1' then
@@ -158,10 +176,13 @@ begin
 
 					-- calcul du max :
 					
-					-- blablabla
+					d0:=abs(integer(data_out_g2)-integer(G_prec2));
+					d1:=abs(integer(data_out_g1)-integer(G_ligne_prec2_g1));
+					d2:=abs(integer(G)-integer(G_ligne_prec2_g2));
+					d3:=abs(integer(G_prec1)-integer(G_ligne_prec1_g2));
 					
-					
-					
+			
+					var_G_Max:=Max(Max(d0,d1),Max(d2,d3));
 
 					
 				-- **** mise a jour des signaux mais effectif en sortant du process
