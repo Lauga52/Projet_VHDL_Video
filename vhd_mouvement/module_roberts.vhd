@@ -143,6 +143,13 @@ begin
 					
 
 					
+					
+					
+					
+					
+					
+					
+					
 
 					
 					-- ** mise a jour des signaux mais effectif en sortant du process
@@ -153,13 +160,13 @@ begin
 
 					--memoires lignes "gradients"				
 						--registres
-					pixel_prec2 = pixel_prec1
-					pixel_prec1 = G
+					G_prec2 = G_prec1
+					G_prec1 = G
 						--signaux
-					pixel_ligne_prec2_g1 = pixel_ligne_prec1_g1
-					pixel_ligne_prec1_g1 = data_out_g1
-					pixel_ligne_prec2_g2 = pixel_ligne_prec1_g2
-					pixel_ligne_prec1_g2 = data_out_g2
+					G_ligne_prec2_g1 = G_ligne_prec1_g1
+					G_ligne_prec1_g1 = data_out_g1
+					Gl_ligne_prec2_g2 = G_ligne_prec1_g2
+					G_ligne_prec1_g2 = data_out_g2
 										
 					
 					
@@ -197,10 +204,7 @@ begin
 	
 end architecture ; -- arch
 
---blablbalbalablablablabla
---meoooowmeowmeow
 --
 -- 1er cycle : lecture + traitement
 -- 2e cycle : ecriture + registres
 --...
---test
