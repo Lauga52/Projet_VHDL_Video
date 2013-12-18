@@ -4,8 +4,38 @@
 # Compile of memoire_ligne.vhd was successful.
 # Compile of module_diff.vhd was successful.
 # Compile of module_fenetrage.vhd was successful.
-# Compile of module_roberts.vhd was successful.
+# Compile of module_roberts.vhd failed with 48 errors.
 # Compile of module_SRAM.vhd was successful.
 # Compile of bench.vhd was successful.
 # Compile of sram.vhd was successful.
-# 8 compiles, 0 failed with no errors. 
+# 8 compiles, 1 failed with 48 errors. 
+# Compile of module_roberts.vhd failed with 2 errors.
+# Compile of module_roberts.vhd failed with 2 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 2 errors.
+# Compile of memoire_ligne.vhd failed with 2 errors.
+# Compile of memoire_ligne.vhd was successful.
+# Compile of module_roberts.vhd failed with 2 errors.
+# Compile of module_roberts.vhd failed with 1 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 4 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of filtre_video.vhd was successful.
+# Compile of memoire_ligne.vhd was successful.
+# Compile of module_diff.vhd was successful.
+# Compile of module_fenetrage.vhd was successful.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_SRAM.vhd was successful.
+# Compile of bench.vhd was successful.
+# Compile of sram.vhd was successful.
+# 8 compiles, 1 failed with 5 errors. 
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 6 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of memoire_ligne.vhd was successful.
+# Compile of module_roberts.vhd failed with 5 errors.
+# Compile of module_roberts.vhd was successful.

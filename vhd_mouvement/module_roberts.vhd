@@ -6,8 +6,8 @@ use IEEE.std_logic_signed.all;
 
 entity module_roberts is
   generic (
-		address_size : integer:=8 --TODO : coder 8 en dur ?
-		--word_size : integer:=8
+		address_size : integer:=8; 
+		word_size : integer:=8
 		);
   port (
   	CLK			: in std_logic;
@@ -29,18 +29,19 @@ architecture arch of module_roberts is
 
 component module_memoire_ligne
 		generic (
-		address_size : integer:=8 --TODO : coder 8 en dur ?
-		--word_size : integer:=8
+		address_size : integer:=8; --TODO : coder 8 en dur ?
+		word_size : integer
 		);
 port (
 		CLK			: in std_logic;
 		RESET		: in std_logic;		
-		address 	: in std_logic_vector(7 downto 0);
-		data_in		: in std_logic_vector(7 downto 0);
-		data_out	: out std_logic_vector(7 downto 0);
+		address 	: in std_logic_vector(address_size-1 downto 0);
+		data_in		: in std_logic_vector(word_size-1 downto 0);
+		data_out	: out std_logic_vector(word_size-1 downto 0);
 		read_write	: in std_logic
 		);
 end component;
+
 
 
 
@@ -73,7 +74,8 @@ begin
 	mem_ligne_pix: module_memoire_ligne
 	
 	generic map(
-		address_size => address_size
+		address_size => address_size,
+		word_size => word_size
 	)
 		
 	port map(
@@ -89,7 +91,8 @@ begin
 	mem_ligne_grad1: module_memoire_ligne
 	
 	generic map(
-		address_size => address_size
+		address_size => address_size,
+		word_size => 16
 	)
 		
 	port map(
@@ -105,7 +108,8 @@ begin
 	mem_ligne_grad2: module_memoire_ligne
 	
 	generic map(
-		address_size => address_size
+		address_size => address_size,
+		word_size => 16
 	)
 		
 	port map(
@@ -122,15 +126,15 @@ begin
 
 	process_roberts : process(CLK, RESET) --signal iY was modified : incoming pixel
 	
-	function Max(a,b:integer)
-		return integer is
+	function Max(a,b:std_logic_vector)
+		return std_logic_vector is
 			begin
-				if a>b
+				if a>b then
 					return a;
 				else
 					return b;
-				end if
-			end Max
+				end if;
+			end Max;
 	
 	
 	
@@ -176,12 +180,12 @@ begin
 
 					-- calcul du max :
 					
-					d0:=abs(integer(data_out_g2)-integer(G_prec2));
-					d1:=abs(integer(data_out_g1)-integer(G_ligne_prec2_g1));
-					d2:=abs(integer(G)-integer(G_ligne_prec2_g2));
-					d3:=abs(integer(G_prec1)-integer(G_ligne_prec1_g2));
+					d0:=abs(data_out_g2-G_prec2);
+					d1:=abs(data_out_g1-G_ligne_prec2_g1);
+					d2:=abs(G-G_ligne_prec2_g2);
+					d3:=abs(G_prec1-G_ligne_prec1_g2);
 					
-			
+
 					var_G_Max:=Max(Max(d0,d1),Max(d2,d3));
 
 					
@@ -193,13 +197,13 @@ begin
 
 					--memoires lignes "gradients"				
 						--registres (signaux)
-					G_prec2 <= G_prec1
-					G_prec1 <= G
+					G_prec2 <= G_prec1;
+					G_prec1 <= G;
 						--signaux (reliés aux memoires lignes)
-					G_ligne_prec2_g1 <= G_ligne_prec1_g1
-					G_ligne_prec1_g1 <= data_out_g1
-					G_ligne_prec2_g2 <= G_ligne_prec1_g2
-					G_ligne_prec1_g2 <= data_out_g2
+					G_ligne_prec2_g1 <= G_ligne_prec1_g1;
+					G_ligne_prec1_g1 <= data_out_g1;
+					G_ligne_prec2_g2 <= G_ligne_prec1_g2;
+					G_ligne_prec1_g2 <= data_out_g2;
 										
 					
 					
