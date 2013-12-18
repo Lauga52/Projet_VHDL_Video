@@ -130,7 +130,7 @@ begin
 			
 				elsif read_write_pix = '0' then -- on va faire une lecture en memoire_ligne
 				
-					-- mise à jour des variables :
+					-- affectation des variables :
 					var_data_out := sig_data_out;
 					var_data_in := iY;
 					var_pixel_lig_prec := pixel_lig_prec;
@@ -140,17 +140,29 @@ begin
 					var_Gh := iY + sig_data_out - pixel_lig_prec - pixel_prec;
 					var_Gv := -iY + sig_data_out + pixel_lig_prec - pixel_prec;
 					sig_G <= var_Gv*var_Gv + var_Gh*Var_Gh;		--TODO : verifier que tout ca tient en un cycle			
-									
-					-- mise a jour des signaux mais effectif en sortant du process
+					
+
+					
+
+					
+					-- ** mise a jour des signaux mais effectif en sortant du process
+					
+					-- memoire ligne "pixels"
 					pixel_lig_prec <= var_data_out; 
 					pixel_prec <= var_data_in; 
 
-					pixel_lig_prec2_g1 <= pixel_lig_prec1_g1
-					pixel_lig_prec2_g2 <= pixel_lig_prec1_g2
-					pixel_lig_prec1_g1 <= data_out_g1
-					pixel_lig_prec1_g2 <= data_out_g2
-					pixel_prec_g1 <= data_in
-					pixel_prec_g2 <= data_in
+					--memoires lignes "gradients"				
+						--registres
+					pixel_prec2 = pixel_prec1
+					pixel_prec1 = G
+						--signaux
+					pixel_ligne_prec2_g1 = pixel_ligne_prec1_g1
+					pixel_ligne_prec1_g1 = data_out_g1
+					pixel_ligne_prec2_g2 = pixel_ligne_prec1_g2
+					pixel_ligne_prec1_g2 = data_out_g2
+										
+					
+					
 					
 					
 					oY <= var_oY;
