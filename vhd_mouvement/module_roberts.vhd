@@ -197,6 +197,7 @@ begin
 	
 end architecture ; -- arch
 
+--blablbalbalablablablabla
 --
 -- 1er cycle : lecture + traitement
 -- 2e cycle : ecriture + registres
