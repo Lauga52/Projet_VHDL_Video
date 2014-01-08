@@ -67,27 +67,7 @@ Model Technology ModelSim ALTERA vcom 6.6d Compiler 2010.11 Nov  2 2010
 -- Compiling entity bench
 -- Compiling architecture a of bench
 
-} {} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_roberts.vhd {0 {vcom -work work -2002 -explicit {C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd}
-Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_SIGNED
--- Compiling entity module_roberts
--- Compiling architecture arch of module_roberts
-** Error: C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd(102): (vcom-1272) Length of formal "data_in" is 8; length of actual is 16.
-
-** Error: C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd(103): (vcom-1272) Length of formal "data_out" is 8; length of actual is 16.
-
-** Error: C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd(119): (vcom-1272) Length of formal "data_in" is 8; length of actual is 16.
-
-** Error: C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd(120): (vcom-1272) Length of formal "data_out" is 8; length of actual is 16.
-
-** Error: C:\Users\user\Desktop\Pierre\Projet_VHDL_Video\vhd_mouvement\module_roberts.vhd(236): VHDL Compiler exiting
-
-} {11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0 19.0 20.0} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_diff.vhd {1 {vcom -work work -2002 -explicit C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_diff.vhd
+} {} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_diff.vhd {1 {vcom -work work -2002 -explicit C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_diff.vhd
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -121,14 +101,14 @@ Model Technology ModelSim ALTERA vcom 6.6d Compiler 2010.11 Nov  2 2010
 -- Compiling entity module_fenetrage
 -- Compiling architecture a of module_fenetrage
 
-} {} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_fenetrage.vhd {1 {vcom -work work -2002 -explicit C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_fenetrage.vhd
+} {} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/memoire_ligne.vhd {1 {vcom -work work -2002 -explicit C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/memoire_ligne.vhd
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package NUMERIC_STD
--- Compiling entity module_fenetrage
--- Compiling architecture A of module_fenetrage
+-- Compiling entity module_memoire_ligne
+-- Compiling architecture A of module_memoire_ligne
 
 } {} {}} E:/GitHub/Projet_VHDL_Video/vhd_mouvement/module_SRAM.vhd {1 {vcom -work work -2002 -explicit E:/GitHub/Projet_VHDL_Video/vhd_mouvement/module_SRAM.vhd
 Model Technology ModelSim ALTERA vcom 6.6d Compiler 2010.11 Nov  2 2010
@@ -137,5 +117,14 @@ Model Technology ModelSim ALTERA vcom 6.6d Compiler 2010.11 Nov  2 2010
 -- Loading package numeric_std
 -- Compiling entity module_sram
 -- Compiling architecture a of module_sram
+
+} {} {}} C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_fenetrage.vhd {1 {vcom -work work -2002 -explicit C:/Users/user/Desktop/Pierre/Projet_VHDL_Video/vhd_mouvement/module_fenetrage.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity module_fenetrage
+-- Compiling architecture A of module_fenetrage
 
 } {} {}}

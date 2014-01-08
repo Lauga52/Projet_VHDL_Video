@@ -160,7 +160,7 @@ begin
 				
 				if RESET = '0' then 
 					read_write <='0';
-				  address_cur <="00000000";
+					address_cur <="00000000";
 			
 				elsif read_write = '0' then -- on va faire une lecture en memoire_ligne
 				
@@ -184,9 +184,27 @@ begin
 					d1:=abs(data_out_g1-G_ligne_prec2_g1);
 					d2:=abs(G-G_ligne_prec2_g2);
 					d3:=abs(G_prec1-G_ligne_prec1_g2);
+					var_G_Max:=Max(Max(d0,d1),Max(d2,d3)); --direction dominante
 					
-
-					var_G_Max:=Max(Max(d0,d1),Max(d2,d3));
+					-- G_ligne_prec1_g1 est le point central du voisinage 3-3
+					if var_G_Max == d0 then
+						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2 then
+							--ismax = 1
+						end if
+					elsif var_G_Max == d1 then
+						if G_ligne_prec1_g1 >= data_out_g1 and G_ligne_prec1_g1 >= G_ligne_prec2_g1
+							--ismax = 1
+						end if
+					elsif var_G_Max == d2 then
+						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2
+							--ismax = 1
+						end if
+					elsif var_G_Max == d3 then
+						G_ligne_prec1_g1 >= G_prec1 and G_ligne_prec1_g1 >= G_ligne_prec1_g2 then
+							--ismax = 1
+						end if
+					end if
+						
 
 					
 				-- **** mise a jour des signaux mais effectif en sortant du process
