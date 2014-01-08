@@ -187,23 +187,23 @@ begin
 					var_G_Max:=Max(Max(d0,d1),Max(d2,d3)); --direction dominante
 					
 					-- G_ligne_prec1_g1 est le point central du voisinage 3-3
-					if var_G_Max == d0 then
+					if var_G_Max = d0 then
 						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2 then
 							--ismax = 1
-						end if
-					elsif var_G_Max == d1 then
-						if G_ligne_prec1_g1 >= data_out_g1 and G_ligne_prec1_g1 >= G_ligne_prec2_g1
+						end if;
+					elsif var_G_Max = d1 then
+						if G_ligne_prec1_g1 >= data_out_g1 and G_ligne_prec1_g1 >= G_ligne_prec2_g1 then
 							--ismax = 1
-						end if
-					elsif var_G_Max == d2 then
-						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2
+						end if;
+					elsif var_G_Max = d2 then
+						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2 then
 							--ismax = 1
-						end if
-					elsif var_G_Max == d3 then
-						G_ligne_prec1_g1 >= G_prec1 and G_ligne_prec1_g1 >= G_ligne_prec1_g2 then
+						end if;
+					elsif var_G_Max = d3 then
+						if G_ligne_prec1_g1 >= G_prec1 and G_ligne_prec1_g1 >= G_ligne_prec1_g2 then
 							--ismax = 1
-						end if
-					end if
+						end if;
+					end if;
 						
 
 					
