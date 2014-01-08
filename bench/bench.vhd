@@ -168,7 +168,7 @@ begin
 		end if;				
 
 -- test 1 :		
-		iY <= std_logic_vector(unsigned(iY) + 1); 
+--		iY <= std_logic_vector(unsigned(iY) + 1); 
 
 -- test 2 :
 --		temp := std_logic_vector(unsigned(VGA_X) + unsigned(VGA_Y(6 downto 0) & '0'));
@@ -191,9 +191,9 @@ begin
 --
 -- test 5:
 --
---iY <= std_logic_vector(unsigned(iY) + unsigned(Compt));
+iY <= std_logic_vector(unsigned(iY) + unsigned(Compt));
 
---Compt <=std_logic_vector(unsigned( Compt) + 1) after 40 ns; 
+Compt <=std_logic_vector(unsigned( Compt) + 1) after 40 ns; 
 
 					
 	end process ; -- process_simu
