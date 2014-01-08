@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+--use IEEE.numeric_std.all;
 use IEEE.std_logic_arith.all;
 use IEEE.std_logic_signed.all;
 
@@ -190,8 +190,9 @@ begin
 					-- Calcul du filtrage :
 					var_Gh := iY + data_out - pixel_lig_prec - pixel_prec;
 					var_Gv := -iY + data_out + pixel_lig_prec - pixel_prec;
-					G <= var_Gv*var_Gv + var_Gh*Var_Gh;		--TODO : verifier que tout ca tient en un cycle			
+					G <= conv_std_logic_vector(unsigned(var_Gv)*unsigned(var_Gv) + unsigned(var_Gh)*unsigned(Var_Gh),16);		--TODO : verifier que tout ca tient en un cycle			
 					
+--NOTE : multiplication de signés differente de non signes. Ici on fait unsigned : composants differents pour mult. Il faut ensuite repasser en logic_vector --> conv_std_logic_vector(unsigned(G)) avec use ieee.std_logic_arith_all et commenter use numeric.std
 
 					-- calcul du max :
 					
