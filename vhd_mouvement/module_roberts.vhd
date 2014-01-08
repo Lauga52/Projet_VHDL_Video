@@ -50,22 +50,22 @@ end component;
 signal address_cur			: std_logic_vector(address_size-1 downto 0) ;
 signal read_write			: std_logic;
 
-signal pixel_lig_prec		: std_logic_vector(7 downto 0) ;
-signal pixel_prec			: std_logic_vector(7 downto 0) ;
-signal data_out				: std_logic_vector(7 downto 0) ;
+signal pixel_lig_prec		: std_logic_vector(7 downto 0):= (others => '0');
+signal pixel_prec			: std_logic_vector(7 downto 0):= (others => '0');
+signal data_out				: std_logic_vector(7 downto 0):= (others => '0');
 
-signal G					: std_logic_vector(15 downto 0) ; --attention : multiplication !
+signal G					: std_logic_vector(15 downto 0):= (others => '0') ; --attention : multiplication !
 
-signal G_prec1				: std_logic_vector(15 downto 0) ;
-signal G_prec2				: std_logic_vector(15 downto 0) ;
-signal data_out_g1			: std_logic_vector(15 downto 0) ;
-signal G_ligne_prec1_g1		: std_logic_vector(15 downto 0) ;
-signal G_ligne_prec2_g1		: std_logic_vector(15 downto 0) ;
-signal data_out_g2			: std_logic_vector(15 downto 0) ;
-signal G_ligne_prec1_g2		: std_logic_vector(15 downto 0) ;
-signal G_ligne_prec2_g2		: std_logic_vector(15 downto 0) ;
+signal G_prec1				: std_logic_vector(15 downto 0):= (others => '0');
+signal G_prec2				: std_logic_vector(15 downto 0):= (others => '0');
+signal data_out_g1			: std_logic_vector(15 downto 0):= (others => '0');
+signal G_ligne_prec1_g1		: std_logic_vector(15 downto 0):= (others => '0');
+signal G_ligne_prec2_g1		: std_logic_vector(15 downto 0):= (others => '0');
+signal data_out_g2			: std_logic_vector(15 downto 0):= (others => '0');
+signal G_ligne_prec1_g2		: std_logic_vector(15 downto 0):= (others => '0');
+signal G_ligne_prec2_g2		: std_logic_vector(15 downto 0):= (others => '0');
 
-signal Max_G 				: std_logic_vector(15 downto 0) ;
+signal Max_G 				: std_logic_vector(15 downto 0):= (others => '0');
 
 
 
@@ -161,6 +161,21 @@ begin
 				if RESET = '0' then 
 					read_write <='0';
 					address_cur <="00000000";
+					
+					pixel_lig_prec <= (others => '0');
+					pixel_prec <= (others => '0');
+					--data_out <= (others => '0');
+					G <= (others => '0') ; --attention multiplication !
+					G_prec1 <= (others => '0');
+					G_prec2 <= (others => '0');
+					--data_out_g1 <= (others => '0');
+					G_ligne_prec1_g1 <= (others => '0');
+					G_ligne_prec2_g1 <= (others => '0');
+					--data_out_g2 <= (others => '0');
+					G_ligne_prec1_g2 <= (others => '0');
+					G_ligne_prec2_g2 <= (others => '0');
+					Max_G <= (others => '0');
+
 			
 				elsif read_write = '0' then -- on va faire une lecture en memoire_ligne
 				
@@ -189,19 +204,27 @@ begin
 					-- G_ligne_prec1_g1 est le point central du voisinage 3-3
 					if var_G_Max = d0 then
 						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2 then
-							--ismax = 1
+							oY <= (others => '1'); --unsigned
+						else
+							oY <= (others => '0');
 						end if;
 					elsif var_G_Max = d1 then
 						if G_ligne_prec1_g1 >= data_out_g1 and G_ligne_prec1_g1 >= G_ligne_prec2_g1 then
-							--ismax = 1
+							oY <= (others => '1'); --unsigned
+						else
+							oY <= (others => '0');
 						end if;
 					elsif var_G_Max = d2 then
 						if G_ligne_prec1_g1 >= G and G_ligne_prec1_g1 >= G_ligne_prec2_g2 then
-							--ismax = 1
+							oY <= (others => '1'); --unsigned
+						else
+							oY <= (others => '0');
 						end if;
 					elsif var_G_Max = d3 then
 						if G_ligne_prec1_g1 >= G_prec1 and G_ligne_prec1_g1 >= G_ligne_prec1_g2 then
-							--ismax = 1
+							oY <= (others => '1'); --unsigned
+						else
+							oY <= (others => '0');
 						end if;
 					end if;
 						
